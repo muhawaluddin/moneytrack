@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Database\Factories\TransactionFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['user_id', 'space_id', 'created_by', 'account_id', 'destination_account_id', 'category_id', 'type', 'amount', 'transacted_at', 'description', 'receipt_path', 'status', 'is_recurring', 'recurring_rule'])]
 class Transaction extends Model
 {
     /** @use HasFactory<TransactionFactory> */
     use HasFactory;
+
+    protected $fillable = ['user_id', 'space_id', 'created_by', 'account_id', 'destination_account_id', 'category_id', 'type', 'amount', 'transacted_at', 'description', 'receipt_path', 'status', 'is_recurring', 'recurring_rule'];
 
     protected function casts(): array
     {

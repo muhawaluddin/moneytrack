@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['space_id', 'created_by', 'name', 'target_amount', 'current_amount', 'deadline', 'color', 'status', 'description'])]
 class FinancialGoal extends Model
 {
+    protected $fillable = ['space_id', 'created_by', 'name', 'target_amount', 'current_amount', 'deadline', 'color', 'status', 'description'];
     protected function casts(): array
     {
         return ['target_amount' => 'decimal:2', 'current_amount' => 'decimal:2', 'deadline' => 'date'];

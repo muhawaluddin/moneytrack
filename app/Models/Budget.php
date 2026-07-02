@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Database\Factories\BudgetFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['user_id', 'space_id', 'category_id', 'month', 'limit_amount'])]
 class Budget extends Model
 {
     /** @use HasFactory<BudgetFactory> */
     use HasFactory;
+
+    protected $fillable = ['user_id', 'space_id', 'category_id', 'month', 'limit_amount'];
 
     protected function casts(): array
     {

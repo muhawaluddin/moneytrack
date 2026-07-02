@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['space_id', 'closed_by', 'month', 'snapshot', 'notes', 'closed_at'])]
 class MonthlyClosing extends Model
 {
+    protected $fillable = ['space_id', 'closed_by', 'month', 'snapshot', 'notes', 'closed_at'];
     protected function casts(): array
     {
         return ['month' => 'date', 'snapshot' => 'array', 'closed_at' => 'datetime'];

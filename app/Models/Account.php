@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Database\Factories\AccountFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['user_id', 'space_id', 'visibility', 'name', 'type', 'bank_name', 'account_number', 'opening_balance', 'current_balance', 'currency', 'color', 'icon', 'notes', 'is_active'])]
 class Account extends Model
 {
     /** @use HasFactory<AccountFactory> */
     use HasFactory;
+
+    protected $fillable = ['user_id', 'space_id', 'visibility', 'name', 'type', 'bank_name', 'account_number', 'opening_balance', 'current_balance', 'currency', 'color', 'icon', 'notes', 'is_active'];
 
     protected function casts(): array
     {

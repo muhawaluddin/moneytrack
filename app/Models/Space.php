@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['owner_id', 'name', 'type', 'color'])]
 class Space extends Model
 {
+    protected $fillable = ['owner_id', 'name', 'type', 'color'];
     protected function casts(): array
     {
         return ['sync_version' => 'integer'];
