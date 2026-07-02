@@ -693,7 +693,7 @@ input.receipt-amount {
         backdrop-filter: blur(16px);
         border-top: 1px solid var(--line);
         z-index: 90;
-        padding: 9px 6px max(9px, env(safe-area-inset-bottom));
+        padding: 0;
     }
     .bottom-nav a {
         font-size: 10px;
