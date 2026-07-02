@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MoneyTrack MT">
+  <rect x="2" y="2" width="60" height="60" rx="18" fill="#087f70"/>
+  <circle cx="17" cy="14" r="20" fill="#16a58f" opacity=".42"/>
+  <polygon points="10,46 10,18 16,18 22,30 28,18 34,18 34,46 28,46 28,30 22,41 16,30 16,46" fill="#fffdf7"/>
+  <rect x="35" y="18" width="19" height="6" rx="3" fill="#f2a33a"/>
+  <rect x="41.5" y="21" width="6" height="25" rx="3" fill="#f2a33a"/>
+</svg>

@@ -1,0 +1,64 @@
+<?php
+
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FinancialGoalController;
+use App\Http\Controllers\MonthlyClosingController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\SpaceInvitationController;
+use App\Http\Controllers\SpaceSyncController;
+use App\Http\Controllers\TransactionController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/', DashboardController::class)->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('accounts', AccountController::class);
+    Route::resource('transactions', TransactionController::class);
+    Route::get('/budgets', [BudgetController::class, 'index'])->name('budgets.index');
+    Route::post('/budgets', [BudgetController::class, 'store'])->name('budgets.store');
+    Route::post('/budgets/copy', [BudgetController::class, 'copy'])->name('budgets.copy');
+    Route::delete('/budgets/{budget}', [BudgetController::class, 'destroy'])->name('budgets.destroy');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+    Route::get('/reports/pdf', [ReportController::class, 'pdf'])->name('reports.pdf');
+    Route::get('/closings', [MonthlyClosingController::class, 'index'])->name('closings.index');
+    Route::post('/closings', [MonthlyClosingController::class, 'store'])->name('closings.store');
+    Route::delete('/closings/{closing}', [MonthlyClosingController::class, 'destroy'])->name('closings.destroy');
+    Route::get('/goals', [FinancialGoalController::class, 'index'])->name('goals.index');
+    Route::post('/goals', [FinancialGoalController::class, 'store'])->name('goals.store');
+    Route::post('/goals/{goal}/contributions', [FinancialGoalController::class, 'contribute'])->name('goals.contribute');
+    Route::delete('/goals/{goal}', [FinancialGoalController::class, 'destroy'])->name('goals.destroy');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'read'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
+    Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::put('/settings/notifications', [SettingsController::class, 'notifications'])->name('settings.notifications');
+    Route::get('/spaces', [SpaceController::class, 'index'])->name('spaces.index');
+    Route::get('/spaces/sync/state', SpaceSyncController::class)->name('spaces.sync');
+    Route::post('/spaces', [SpaceController::class, 'store'])->name('spaces.store');
+    Route::put('/spaces/{space}', [SpaceController::class, 'update'])->name('spaces.update');
+    Route::delete('/spaces/{space}', [SpaceController::class, 'destroy'])->name('spaces.destroy');
+    Route::post('/spaces/{space}/switch', [SpaceController::class, 'switch'])->name('spaces.switch');
+    Route::put('/spaces/{space}/members/{user}', [SpaceController::class, 'updateMember'])->name('spaces.members.update');
+    Route::delete('/spaces/{space}/members/{user}', [SpaceController::class, 'removeMember'])->name('spaces.members.destroy');
+    Route::post('/invitations', [SpaceInvitationController::class, 'store'])->name('invitations.store');
+    Route::delete('/invitations/{invitation}', [SpaceInvitationController::class, 'destroy'])->name('invitations.destroy');
+    Route::get('/invitations/{token}/accept', [SpaceInvitationController::class, 'accept'])->name('invitations.accept');
+});
