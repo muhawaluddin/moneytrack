@@ -534,7 +534,7 @@ input.receipt-amount {
         background: color-mix(in srgb, var(--card) 94%, transparent);
         backdrop-filter: blur(16px);
         border-top: 1px solid var(--line);
-        z-index: 20;
+        z-index: 90;
         padding: 9px 6px max(9px, env(safe-area-inset-bottom));
     }
     .bottom-nav a {
