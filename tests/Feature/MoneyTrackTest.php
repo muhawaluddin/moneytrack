@@ -53,6 +53,22 @@ class MoneyTrackTest extends TestCase
         $this->assertStringContainsString('visibility:visible;pointer-events:auto', $mobileCss);
     }
 
+    public function test_system_dark_theme_has_accessible_color_tokens_and_native_controls(): void
+    {
+        $user = User::factory()->create(['theme' => 'system']);
+
+        $this->actingAs($user)->get(route('dashboard'))
+            ->assertOk()
+            ->assertSee('data-theme="system"', false)
+            ->assertSee('/app.css?v=8', false);
+
+        $css = file_get_contents(public_path('app.css'));
+        $this->assertStringContainsString('html[data-theme="system"]', $css);
+        $this->assertStringContainsString('color-scheme: dark', $css);
+        $this->assertStringContainsString('--brand: #67e1cc', $css);
+        $this->assertStringContainsString('--warning-text: #ffd089', $css);
+    }
+
     public function test_registration_creates_default_categories(): void
     {
         $this->post('/register', [
