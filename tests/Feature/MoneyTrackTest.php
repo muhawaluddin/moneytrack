@@ -41,11 +41,16 @@ class MoneyTrackTest extends TestCase
         $response = $this->actingAs($user)->get(route('dashboard'))->assertOk()
             ->assertSee('aria-controls="mobile-menu"', false)
             ->assertSee('id="mobile-menu"', false)
+            ->assertSee('aria-current="page"', false)
             ->assertSee('Semua fitur MoneyTrack');
 
         foreach (['Beranda', 'Notifikasi', 'Transaksi', 'Anggaran', 'Target Keuangan', 'Laporan', 'Tutup Buku', 'Sumber Kas', 'Ruang & Anggota', 'Kategori', 'Pengaturan'] as $label) {
             $response->assertSee($label);
         }
+
+        $mobileCss = file_get_contents(public_path('interface-polish.css'));
+        $this->assertStringContainsString('visibility:hidden;pointer-events:none', $mobileCss);
+        $this->assertStringContainsString('visibility:visible;pointer-events:auto', $mobileCss);
     }
 
     public function test_registration_creates_default_categories(): void
